@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nalu World · Your travels, as a world you can explore</title>
+<meta name="description" content="Every trip lifts the fog on a 3D map of the world. Collect a stamp in every country, color in every region, relive every road trip. Coming to iPhone and Android.">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta property="og:title" content="Nalu World">
+<meta property="og:description" content="Your travels, as a world you can explore. Coming to iPhone and Android.">
+<meta property="og:image" content="https://naluworld.com/img/icon-512.png">
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root{--navy:#1d2b44;--night:#0d1430;--cream:#fbf6ee;--coral:#ef7a5b;--ink:#4a5872;--dawn:linear-gradient(180deg,#1d2b52 0%,#5b4f8a 45%,#ff9f7a 85%)}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--navy);background:var(--cream);-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  section{position:relative;overflow:hidden}
+  .stars{position:absolute;inset:0 0 auto 0;height:560px;background:url(img/stars.svg) center top/1440px 560px repeat-x;pointer-events:none}
+  .wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:130px;z-index:3;pointer-events:none}
+  h1{margin:0;font:700 66px/1.04 Fredoka,sans-serif;letter-spacing:-.5px}
+  h2{margin:0;font:700 50px/1.08 Fredoka,sans-serif;letter-spacing:-.3px}
+  h3{margin:0;font:700 28px Fredoka,sans-serif}
+  .sub{font:500 20px/1.5 Inter,sans-serif}
+  .eyebrow{font:700 13px Inter,sans-serif;letter-spacing:2px;color:var(--coral);margin-bottom:16px}
+
+  /* header */
+  header{position:absolute;left:0;right:0;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:30px 64px;color:#fff}
+  .brand{display:flex;align-items:center;gap:12px;font:700 26px Fredoka,sans-serif}
+  .brand img{width:46px;height:46px;border-radius:11px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+  nav{display:flex;align-items:center;gap:34px;font:600 15px Inter,sans-serif}
+  nav a:not(.pill){color:rgba(255,255,255,.85)}
+  .pill{padding:11px 20px;border-radius:999px;font:700 15px Inter,sans-serif;background:#fff;color:var(--navy)}
+
+  /* waitlist form */
+  .join{display:flex;gap:10px;margin-top:34px;justify-content:center}
+  .join input{width:340px;height:58px;border-radius:999px;border:0;padding:0 26px;font:500 17px Inter,sans-serif;color:var(--navy);background:#fff;outline:none}
+  .join input:focus{box-shadow:0 0 0 3px rgba(255,255,255,.55)}
+  .join button{height:58px;padding:0 30px;border-radius:999px;border:0;background:var(--coral);color:#fff;font:700 17px Inter,sans-serif;cursor:pointer;box-shadow:0 8px 20px rgba(239,122,91,.4)}
+  .join button:hover{filter:brightness(1.06)}
+  .note{font:500 14px Inter,sans-serif;margin-top:16px;color:rgba(255,255,255,.78)}
+  .note a{text-decoration:underline;text-underline-offset:2px}
+  .done{display:none;font:600 18px Inter,sans-serif;margin-top:34px}
+  .joined .join{display:none}.joined .done{display:block}
+  .trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+  .err{font:600 15px Inter,sans-serif;margin:14px 0 0;color:#fff}
+  .join button:disabled{opacity:.7;cursor:default}
+
+  /* 1. top */
+  .hero{height:900px;background:var(--dawn);text-align:center;color:#fff}
+  .hero .copy{position:relative;z-index:2;padding-top:140px}
+  .hero .sub{color:rgba(255,255,255,.88);max-width:660px;margin:20px auto 0}
+  .hero .art{position:absolute;left:50%;bottom:-310px;width:1600px;max-width:none;transform:translateX(-50%);z-index:1}
+
+  /* 2. how it works */
+  .how{padding:110px 24px 210px;text-align:center}
+  .steps{display:flex;justify-content:center;gap:70px;margin-top:64px}
+  .step{width:330px;display:flex;flex-direction:column;align-items:center}
+  .phone{width:300px;aspect-ratio:300/650;border-radius:46px;background:#0d1226;padding:10px;box-shadow:0 30px 60px rgba(21,29,56,.28)}
+  .phone img{width:100%;height:100%;border-radius:37px;object-fit:cover}
+  .num{width:44px;height:44px;border-radius:50%;background:var(--coral);color:#fff;font:700 20px Fredoka,sans-serif;display:grid;place-items:center;margin:34px 0 14px}
+  .step p{font:500 17px/1.5 Inter,sans-serif;color:var(--ink);margin:10px 0 0}
+
+  /* 3. road trips */
+  .road{background:linear-gradient(180deg,#0d1430 0%,#1a2550 55%,#0d1430 100%);color:#fff;padding:120px 0 110px}
+  .road .inner{position:relative;z-index:2;max-width:1140px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:60px}
+  .road .text{max-width:560px}
+  .road .eyebrow{color:#ffb08f}
+  .road .sub{color:rgba(255,255,255,.82);margin-top:22px}
+  .road .phone{transform:rotate(4deg);flex:none}
+
+  /* 4. last call */
+  .last{height:640px;background:linear-gradient(180deg,#0d1430 0%,#2a3466 28%,#5b4f8a 58%,#ff9f7a 92%);text-align:center;color:#fff}
+  .last .copy{position:relative;z-index:2;padding-top:110px}
+  .last .art{position:absolute;left:50%;bottom:-320px;width:700px;max-width:none;transform:translateX(-50%);z-index:1}
+
+  footer{display:flex;justify-content:space-between;align-items:center;padding:34px 64px;font:500 14px Inter,sans-serif;color:#7d8a9c}
+  footer .brand{color:var(--navy);font-size:20px}
+  footer .brand img{width:34px;height:34px;border-radius:8px}
+  footer .links{display:flex;gap:30px}
+
+  /* phones */
+  @media (max-width:760px){
+    header{padding:18px 16px}
+    .brand{font-size:21px;gap:10px}.brand img{width:38px;height:38px;border-radius:9px}
+    nav a:not(.pill){display:none}
+    .pill{padding:9px 16px;font-size:14px}
+    h1{font-size:40px}
+    h2{font-size:34px}
+    h3{font-size:24px}
+    .sub{font-size:17px}
+    .hero{height:auto;min-height:760px;padding:0 16px}
+    .hero .copy{padding-top:112px}
+    .join{flex-direction:column;align-items:stretch;max-width:420px;margin-left:auto;margin-right:auto;margin-top:26px}
+    .join input,.join button{width:100%;height:54px}
+    .hero .art{width:900px;bottom:-175px}
+    .wave{height:70px}
+    .how{padding:70px 16px 150px}
+    .steps{flex-direction:column;align-items:center;gap:56px;margin-top:44px}
+    .step{width:100%;max-width:340px}
+    .phone{width:240px;border-radius:38px;padding:8px}
+    .phone img{border-radius:31px}
+    .road{padding:70px 0 80px}
+    .road .inner{flex-direction:column;text-align:center;gap:44px;padding:0 16px}
+    .last{height:600px;padding:0 16px}
+    .last .copy{padding-top:80px}
+    .last .art{width:560px;bottom:-256px}
+    footer{flex-direction:column;gap:18px;padding:28px 16px}
+    footer .links{gap:22px}
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="stars"></div>
+  <header>
+    <a class="brand" href="#"><img src="img/icon-512.png" alt="">Nalu World</a>
+    <nav><a href="#how">How it works</a><a href="#road-trips">Road trips</a><a class="pill" href="#join">Notify me</a></nav>
+  </header>
+  <div class="copy" id="join">
+    <h1>Your travels, as a world<br>you can explore.</h1>
+    <p class="sub">Every trip lifts the fog on a 3D map of the world. Collect a stamp in every country, color in every region, relive every road trip.</p>
+    <div class="signup">
+      <form class="join" data-source="hero"><input type="email" name="email" placeholder="your@email.com" aria-label="Your email" autocomplete="email" maxlength="254" required><input class="trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button type="submit">Notify me</button></form>
+      <p class="done" role="status">You're on the list. See you at launch.</p>
+      <p class="err" role="alert" hidden>That didn't go through. Try again in a moment.</p>
+    </div>
+    <p class="note">Coming to iPhone and Android · one email when it's out, nothing else. <a href="privacy.html#waitlist">Privacy</a></p>
+  </div>
+  <img class="art" src="img/hero-world.webp" alt="Nalu, a little wave, sitting on top of the world">
+  <svg class="wave" viewBox="0 0 1440 130" preserveAspectRatio="none"><path d="M0 49 C 220 3 470 3 720 47 S 1210 94 1440 39 L1440 130 L0 130 Z" fill="#fbf6ee" opacity=".45"/><path d="M0 81 C 260 39 520 42 760 75 S 1220 112 1440 68 L1440 130 L0 130 Z" fill="#fbf6ee"/></svg>
+</section>
+
+<section class="how" id="how">
+  <div class="eyebrow">HOW IT WORKS</div>
+  <h2>Every trip shows up<br>on your world.</h2>
+  <div class="steps">
+    <div class="step"><div class="phone"><img src="img/screen-world.webp" alt="A little traveler in front of Le Morne, in 3D" loading="lazy"></div><div class="num">1</div><h3>Go somewhere.</h3>
+      <p>Your little traveler lands in a 3D world built from the real map, mountains and beaches included.</p></div>
+    <div class="step"><div class="phone"><img src="img/screen-fog.webp" alt="Mauritius, 30% explored, 3 of 10 regions" loading="lazy"></div><div class="num">2</div><h3>The fog lifts.</h3>
+      <p>Every place you visit clears the clouds. Each region you reach adds to your % of the country.</p></div>
+    <div class="step"><div class="phone"><img src="img/screen-stamps.webp" alt="A collection of country stamps sorted by level" loading="lazy"></div><div class="num">3</div><h3>Collect the stamp.</h3>
+      <p>One stamp per country. It levels up as you explore, all the way to diamond at 100%.</p></div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 130" preserveAspectRatio="none"><path d="M0 49 C 220 3 470 3 720 47 S 1210 94 1440 39 L1440 130 L0 130 Z" fill="#ffcfb0"/><path d="M0 81 C 260 39 520 42 760 75 S 1220 112 1440 68 L1440 130 L0 130 Z" fill="#0d1430"/></svg>
+</section>
+
+<section class="road" id="road-trips">
+  <div class="stars"></div>
+  <div class="inner">
+    <div class="text">
+      <div class="eyebrow">ROAD TRIPS</div>
+      <h2>Relive every road trip.</h2>
+      <p class="sub">Your route drawn day by day across the real relief, with your stops, your notes and your photos. Press play and watch the whole trip again, one day every 10 seconds.</p>
+    </div>
+    <div class="phone"><img src="img/screen-replay.webp" alt="A road trip replay along the Garden Route, day 6" loading="lazy"></div>
+  </div>
+</section>
+
+<section class="last">
+  <div class="stars"></div>
+  <div class="copy">
+    <h2>Be the first to explore.</h2>
+    <div class="signup">
+      <form class="join" data-source="end"><input type="email" name="email" placeholder="your@email.com" aria-label="Your email" autocomplete="email" maxlength="254" required><input class="trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button type="submit">Notify me</button></form>
+      <p class="done" role="status">You're on the list. See you at launch.</p>
+      <p class="err" role="alert" hidden>That didn't go through. Try again in a moment.</p>
+    </div>
+    <p class="note">Coming to iPhone and Android · one email when it's out, nothing else. <a href="privacy.html#waitlist">Privacy</a></p>
+  </div>
+  <img class="art" src="img/cta-world.webp" alt="" loading="lazy">
+  <svg class="wave" viewBox="0 0 1440 130" preserveAspectRatio="none"><path d="M0 49 C 220 3 470 3 720 47 S 1210 94 1440 39 L1440 130 L0 130 Z" fill="#fbf6ee" opacity=".45"/><path d="M0 81 C 260 39 520 42 760 75 S 1220 112 1440 68 L1440 130 L0 130 Z" fill="#fbf6ee"/></svg>
+</section>
+
+<footer>
+  <a class="brand" href="#"><img src="img/icon-512.png" alt="">Nalu World</a>
+  <div class="links"><a href="privacy.html">Privacy</a><a href="mailto:hello@naluworld.com">Contact</a><span>© 2026 Nalu World</span></div>
+</footer>
+
+<script>
+  // The waitlist writes to its own table in the Supabase project Loop (site/supabase/01-waitlist.sql).
+  // The publishable key is public by design: the table only accepts new rows and cannot be read.
+  const SUPABASE_URL = 'https://ttqoliuvnjctbbrjusdx.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_I9esUKGVDgQ6oioAAyA_hg_u84i3osZ';
+  const ref = new URLSearchParams(location.search).get('ref');
+  document.querySelectorAll('form.join').forEach(form => form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const box = form.closest('.signup'), err = box.querySelector('.err'), button = form.querySelector('button');
+    err.hidden = true;
+    // A field nobody sees. Filled in, it is a robot: act as if it went through, send nothing.
+    if (form.website.value) { box.classList.add('joined'); return; }
+    const email = form.email.value.trim();
+    if (!email) return;
+    button.disabled = true; button.textContent = 'Sending…';
+    try {
+      const res = await fetch(SUPABASE_URL + '/rest/v1/nalu_waitlist', {
+        method: 'POST',
+        headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+        body: JSON.stringify({ email, source: (form.dataset.source + (ref ? ':' + ref : '')).slice(0, 60) })
+      });
+      // 409: already on the list. For the person it is the same good news.
+      if (!res.ok && res.status !== 409) throw new Error(res.status);
+      box.classList.add('joined');
+    } catch (_) {
+      err.hidden = false;
+    } finally {
+      button.disabled = false; button.textContent = 'Notify me';
+    }
+  }));
+</script>
+</body>
+</html>
